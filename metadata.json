@@ -1,0 +1,6 @@
+{
+  "name": "Kisan Alert AI",
+  "description": "Unified Agricultural Intelligence Platform with an AI Farming Copilot, crop diagnostic, soil/weather intelligence, market price tracker, and regional Rythu Seva Kendras integration.",
+  "requestFramePermissions": ["camera", "microphone", "geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

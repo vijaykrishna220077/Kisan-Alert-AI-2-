@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: kisan-alert-ai
+    env: docker
+    plan: free
+    branch: main
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: GOOGLE_MAPS_PLATFORM_KEY
+        sync: false # Requires manual entry in dashboard
+      - key: GEMINI_API_KEY
+        sync: false # Requires manual entry in dashboard
+      - key: OPENROUTER_API_KEY
+        sync: false # Optional

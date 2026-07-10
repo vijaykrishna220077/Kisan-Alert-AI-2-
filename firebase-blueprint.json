@@ -1,0 +1,64 @@
+{
+  "entities": {
+    "users": {
+      "title": "User Profile",
+      "description": "User profile with name, role, state, and district.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "phone": { "type": "string" },
+        "role": { "type": "string", "enum": ["Farmer", "Officer", "Expert", "Government", "Admin"] },
+        "state": { "type": "string" },
+        "district": { "type": "string" },
+        "village": { "type": "string" }
+      },
+      "required": ["id", "name", "role"]
+    },
+    "expenses": {
+      "title": "Expense Entry",
+      "description": "Registered expenses with categories, descriptions, amounts, and dates.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "farmerId": { "type": "string" },
+        "category": { "type": "string" },
+        "description": { "type": "string" },
+        "amount": { "type": "number" },
+        "date": { "type": "string" },
+        "cropCycle": { "type": "string" }
+      },
+      "required": ["id", "farmerId", "category", "amount", "date"]
+    },
+    "messages": {
+      "title": "Chat Message",
+      "description": "Multi-turn copilot chat logs synced to Firestore.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "sender": { "type": "string", "enum": ["user", "copilot"] },
+        "text": { "type": "string" },
+        "timestamp": { "type": "string" },
+        "language": { "type": "string" },
+        "intent": { "type": "string" },
+        "steps": { "type": "array" }
+      },
+      "required": ["id", "userId", "sender", "text", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "users",
+      "description": "Active user profiles including farmers and agronomists."
+    },
+    "/users/{userId}/expenses/{expenseId}": {
+      "schema": "expenses",
+      "description": "Registered farm expenditure ledger entries."
+    },
+    "/users/{userId}/messages/{messageId}": {
+      "schema": "messages",
+      "description": "Conversational context and routing telemetry records."
+    }
+  }
+}

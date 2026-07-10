@@ -1,7 +1,7 @@
 import express from "express";
 import path from "path";
 import dotenv from "dotenv";
-import { createServer as createViteServer } from "vite";
+// Vite imported dynamically in dev mode
 import { GoogleGenAI, Type, ThinkingLevel } from "@google/genai";
 import { alertRouter } from "./server/alertEngine";
 import { surveillanceRouter } from "./server/surveillance";
@@ -961,6 +961,7 @@ async function startServer() {
 
   if (process.env.NODE_ENV !== "production") {
     // Development mode
+    const { createServer: createViteServer } = await import("vite");
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: "spa",

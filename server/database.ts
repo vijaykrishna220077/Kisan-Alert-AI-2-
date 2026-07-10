@@ -1,8 +1,9 @@
 import fs from "fs";
 import path from "path";
 
-// Define the database path
-const DB_FILE = path.join(process.cwd(), "server", "db.json");
+const isVercel = !!process.env.VERCEL;
+const ORIGINAL_DB_FILE = path.join(process.cwd(), "server", "db.json");
+const DB_FILE = isVercel ? "/tmp/db.json" : ORIGINAL_DB_FILE;
 
 // Define TypeScript interfaces for our DB entities
 export interface DbUser {
@@ -195,8 +196,13 @@ export function initDb() {
     fs.mkdirSync(dir, { recursive: true });
   }
   if (!fs.existsSync(DB_FILE)) {
-    fs.writeFileSync(DB_FILE, JSON.stringify(DEFAULT_SCHEMA, null, 2), "utf-8");
-    console.log("[DB] Created new database db.json and seeded initial tables.");
+    if (isVercel && fs.existsSync(ORIGINAL_DB_FILE)) {
+      fs.copyFileSync(ORIGINAL_DB_FILE, DB_FILE);
+      console.log("[DB] Copied bundled db.json to /tmp for Vercel.");
+    } else {
+      fs.writeFileSync(DB_FILE, JSON.stringify(DEFAULT_SCHEMA, null, 2), "utf-8");
+      console.log("[DB] Created new database db.json and seeded initial tables.");
+    }
   }
 }
 

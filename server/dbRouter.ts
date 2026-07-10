@@ -10,7 +10,7 @@ import {
   DbCropHistory, 
   DbIotSensorData, 
   DbChatMessage 
-} from "./database";
+} from "./database.js";
 
 // Create Express router
 export const dbRouter = express.Router();

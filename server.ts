@@ -3,9 +3,9 @@ import path from "path";
 import dotenv from "dotenv";
 // Vite imported dynamically in dev mode
 import { GoogleGenAI, Type, ThinkingLevel } from "@google/genai";
-import { alertRouter } from "./server/alertEngine";
-import { surveillanceRouter } from "./server/surveillance";
-import { dbRouter } from "./server/dbRouter";
+import { alertRouter } from "./server/alertEngine.js";
+import { surveillanceRouter } from "./server/surveillance.js";
+import { dbRouter } from "./server/dbRouter.js";
 
 // Load environment variables
 dotenv.config();
@@ -52,7 +52,7 @@ import {
   AllProvidersBusyError,
   ProviderHealthMonitor,
   handleGatewayError
-} from "./server/aiGateway";
+} from "./server/aiGateway.js";
 
 // Compatibility wrapper for any internal legacy calls routing through rate-limiter queue
 async function generateContentWithRetry(ai: any, params: { model: string; contents: any; config?: any }, retries = 3, delay = 1000): Promise<any> {

@@ -1,5 +1,5 @@
 import { GoogleGenAI, Type, ThinkingLevel } from "@google/genai";
-import { readDb } from "./database";
+import { readDb } from "./database.js";
 
 // Setup Gemini Client with OpenRouter transparent proxy support
 function translateGeminiToOpenRouterMessages(contents: any, systemInstruction?: any): any[] {

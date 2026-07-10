@@ -1,6 +1,6 @@
 import express from "express";
 import { Type } from "@google/genai";
-import { getGeminiClient } from "./aiGateway";
+import { getGeminiClient } from "./aiGateway.js";
 
 // Create router
 export const alertRouter = express.Router();
